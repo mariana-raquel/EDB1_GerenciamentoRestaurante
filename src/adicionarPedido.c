@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../include/adicionarPedido.h"
 #include "../include/cardapio.h"
 
 int adicionarPedido() {

@@ -1,3 +1,6 @@
+#ifndef CARDAPIO_H
+#define CARDAPIO_H
+
 typedef struct itemCardapio {
     int id;
     char nomePrato[50];
@@ -12,3 +15,5 @@ typedef struct cardapio {
 Cardapio montarCardapio();
 
 void listarCardapio(Cardapio *cardapio);
+
+#endif
