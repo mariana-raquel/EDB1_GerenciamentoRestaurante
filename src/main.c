@@ -14,6 +14,14 @@
         5. Modularize o projeto (.c, .h e makefile).
  */
 
+int maisOpcoes() {
+    int opcao = 0;
+    printf("Deseja utilizar alguma outra funcionalidade?\n");
+    printf("0 - Sim\t\t 6 - Não\n\n");
+    scanf("%i", &opcao);
+    return opcao;
+}
+
 int main() {
     int opcao = 0;
 
@@ -24,34 +32,39 @@ int main() {
         printf("3 - Processar um pedido\t\t\t");
         printf("4 - Listar os pedidos pendentes\n");
         printf("5 - Listar os pedidos em processamento  ");
-        printf("6 - Sair\n");
+        printf("6 - Sair\n\n");
 
         scanf("%i", &opcao);
         
         if(opcao >= 1 && opcao <= 6) {
             switch (opcao) {
                 case 1:
-                    printf("Você escolheu a opção: 1 - Adicionar um pedido\n");
+                    printf("Você escolheu a opção: 1 - Adicionar um pedido\n\n");
                     adicionarPedido();
+                    opcao = maisOpcoes();
                     break;
                 case 2:
-                    printf("Você escolheu a opção: 2 - Remover um pedido\n");
+                    printf("Você escolheu a opção: 2 - Remover um pedido\n\n");
                     removerPedido();
+                    opcao = maisOpcoes();
                     break;
                 case 3:
-                    printf("Você escolheu a opção: 3 - Processar um pedido\n");
+                    printf("Você escolheu a opção: 3 - Processar um pedido\n\n");
                     processarPedido();
+                    opcao = maisOpcoes();
                     break;
                 case 4:
-                    printf("Você escolheu a opção: 4 - Listar os pedidos pendentes\n");
+                    printf("Você escolheu a opção: 4 - Listar os pedidos pendentes\n\n");
                     listarPedidosPendentes();
+                    opcao = maisOpcoes();
                     break;
                 case 5:
-                    printf("Você escolheu a opção: 5 - Listar os pedidos em processamento\n");
+                    printf("Você escolheu a opção: 5 - Listar os pedidos em processamento\n\n");
                     listarPedidosEmProcessamento();
+                    opcao = maisOpcoes();
                     break;
                 case 6:
-                    printf("Você escolheu a opção: 6 - Sair\n");
+                    printf("Você escolheu a opção: 6 - Sair\n\n");
                 default:
                     break;
             }
