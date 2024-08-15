@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../include/structs.h"
 #include "../include/adicionarPedido.h"
 #include "../include/removerPedido.h"
 #include "../include/processarPedido.h"
@@ -16,19 +17,19 @@
 
 int maisOpcoes() {
     int opcao = 0;
-    printf("Deseja utilizar alguma outra funcionalidade?\n");
-    printf("0 - Sim\t\t 6 - Não\n\n");
+    printf("\nDeseja utilizar alguma outra funcionalidade?\n");
+    printf("1 - Sim\t\t7 - Não\n\n");
     scanf("%i", &opcao);
-    return opcao;
+    return opcao-1;
 }
 
 int main() {
-    No *cabeca = NULL;
+    No *cabecaLista = NULL;
 
     int opcao = 0;
 
     while(opcao < 1 || opcao > 6) {
-        printf("Informe qual funcionalidade deseja utilizar:\n");
+        printf("\nInforme qual funcionalidade deseja utilizar:\n");
         printf("1 - Adicionar um pedido\t\t\t");
         printf("2 - Remover um pedido\n");
         printf("3 - Processar um pedido\t\t\t");
@@ -41,12 +42,12 @@ int main() {
             switch (opcao) {
                 case 1:
                     printf("Você escolheu a opção: 1 - Adicionar um pedido\n\n");
-                    adicionarPedido(&cabeca);
+                    adicionarPedido(&cabecaLista);
                     opcao = maisOpcoes();
                     break;
                 case 2:
                     printf("Você escolheu a opção: 2 - Remover um pedido\n\n");
-                    removerPedido();
+                    removerPedido(&cabecaLista);
                     opcao = maisOpcoes();
                     break;
                 case 3:
@@ -56,7 +57,7 @@ int main() {
                     break;
                 case 4:
                     printf("Você escolheu a opção: 4 - Listar os pedidos pendentes\n\n");
-                    listarPedidosPendentes(cabeca);
+                    listarPedidosPendentes(cabecaLista);
                     opcao = maisOpcoes();
                     break;
                 case 5:

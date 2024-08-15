@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "../include/structs.h"
 #include "../include/cardapio.h"
 
 Cardapio montarCardapio() {

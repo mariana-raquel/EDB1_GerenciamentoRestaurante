@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-#include "../include/adicionarPedido.h"
+#include <stdlib.h>
+#include "../include/structs.h"
 #include "../include/cardapio.h"
 #include "../include/listarPedidosPendentes.h"
 
+#include "../include/adicionarPedido.h"
 
 /*
     Funcionalidades:
@@ -16,26 +18,40 @@
 */
 
 void adicionarPedido(No **cabeca) {
+    int maisPedidos = 1;
+    
     Cardapio cardapio = montarCardapio();
     printf("Este é o nosso cardápio:\n\n");
     listarCardapio(&cardapio);
     
-    printf("Por favor, nos informe o nome do prato que deseja pedir:\n");
-    
-    char prato[50];
-    fgets(prato, 50, stdin);
-    prato[strlen(prato)-1] = '\0';
+    while(maisPedidos == 1) {
+        Pedido p;
+        
+        int qtdPratos = 0;
+        printf("Quantos pratos você deseja acrescentar no pedido? ");
+        scanf("%i", &qtdPratos);
+        p.qtdPratos = qtdPratos;
+        p.pratos = malloc(sizeof(ItemCardapio) * qtdPratos);
 
-    int index = buscarPrato(prato, &cardapio);
-    while(index < 0) {
-        printf("\nDesculpe, não encontramos o seu prato. Tente informá-lo novamente!\n");
-        fgets(prato, 50, stdin);
-        prato[strlen(prato)-1] = '\0';
-        index = buscarPrato(prato, &cardapio);
+        printf("\nPor favor, nos informe os ids do prato que deseja pedir (separados por espaço): ");
+        int index = -1;
+        for(int i = 0; i < qtdPratos; i++) {
+            scanf("%i", &index);
+            while(index < 1 || index > 15) {
+                printf("\nDesculpe, não conhecemos o prato [%i]. Digite novamente:\n", index);
+                scanf("%i", &index);
+            }
+            p.pratos[i].id = cardapio.pratos[index-1].id;
+            strcpy(p.pratos[i].nomePrato, cardapio.pratos[index-1].nomePrato);
+            strcpy(p.pratos[i].tipo, cardapio.pratos[index-1].tipo);
+        }
+        
+        insercaoNoInicio(cabeca, p);
+        listarPedidosPendentes(*cabeca);
+
+        printf("\nDeseja fazer mais algum pedido?\n");
+        printf("1 - Sim\t\t2- Não\n");
+        scanf("%i", &maisPedidos);
     }
-    printf("\nVocê escolheu o(a) %s %s. Iremos adicionar seu pedido!\n", cardapio.pratos[index].tipo, cardapio.pratos[index].nomePrato);
-            
-    insercaoNoInicio(cabeca, cardapio.pratos[index]);
-    listarPedidosPendentes(*cabeca);
 
 }
