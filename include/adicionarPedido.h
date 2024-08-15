@@ -1,6 +1,8 @@
 #ifndef ADICIONAR_PEDIDO_H
 #define ADICIONAR_PEDIDO_H
 
-int adicionarPedido();
+#include "../include/listarPedidosPendentes.h"
+
+void adicionarPedido(No **cabeca);
 
 #endif

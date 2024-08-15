@@ -4,16 +4,17 @@
 typedef struct itemCardapio {
     int id;
     char nomePrato[50];
+    char tipo[16];
 } ItemCardapio;
 
 typedef struct cardapio {
-    ItemCardapio entradas[5];
-    ItemCardapio pratosPrincipais[5];
-    ItemCardapio sobremesas[5];
+    ItemCardapio pratos[15];
 } Cardapio;
 
 Cardapio montarCardapio();
 
 void listarCardapio(Cardapio *cardapio);
+
+int buscarPrato(char prato[50], Cardapio *cardapio);
 
 #endif

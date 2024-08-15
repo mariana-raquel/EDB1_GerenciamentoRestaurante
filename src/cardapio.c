@@ -11,14 +11,17 @@ Cardapio montarCardapio() {
     char sobremesas[5][50] = { "Tiramisu", "Cheesecake de Frutas Vermelhas", "Mousse de Chocolate", "Pudim de Leite", "Sorvete de Baunilha com Calda de Morango" };
 
     for(int i = 0; i < 5; i++) {
-        cardapio.entradas[i].id = i + 1;
-        strcpy(cardapio.entradas[i].nomePrato, entradas[i]);
+        cardapio.pratos[i].id = i + 1;
+        strcpy(cardapio.pratos[i].tipo, "Entrada");
+        strcpy(cardapio.pratos[i].nomePrato, entradas[i]);
 
-        cardapio.pratosPrincipais[i].id = i + 1;
-        strcpy(cardapio.pratosPrincipais[i].nomePrato, pratosPrincipais[i]);
+        cardapio.pratos[i+5].id = i + 6;
+        strcpy(cardapio.pratos[i+5].tipo, "Prato Principal");
+        strcpy(cardapio.pratos[i+5].nomePrato, pratosPrincipais[i]);
 
-        cardapio.sobremesas[i].id = i + 1;
-        strcpy(cardapio.sobremesas[i].nomePrato, sobremesas[i]);
+        cardapio.pratos[i+10].id = i + 11;
+        strcpy(cardapio.pratos[i+10].tipo, "Sobremesa");
+        strcpy(cardapio.pratos[i+10].nomePrato, sobremesas[i]);
     }
 
     return cardapio;
@@ -29,18 +32,32 @@ void listarCardapio(Cardapio *cardapio)  {
 
     printf("ENTRADAS:\n");
     for(int i = 0; i < 5; i++) { 
-        printf("%i. %s\n", cardapio->entradas[i].id, cardapio->entradas[i].nomePrato);
+        if(strcmp(cardapio->pratos[i].tipo, "Entrada") == 0) {
+            printf("%i. %s\n", cardapio->pratos[i].id, cardapio->pratos[i].nomePrato);
+        }
     }
 
     printf("\nPRATOS PRINCIPAIS:\n");
-    for(int i = 0; i < 5; i++) { 
-        printf("%i. %s\n", cardapio->pratosPrincipais[i].id, cardapio->pratosPrincipais[i].nomePrato);
+    for(int i = 5; i < 10; i++) { 
+        if(strcmp(cardapio->pratos[i].tipo, "Prato Principal") == 0) {
+            printf("%i. %s\n", cardapio->pratos[i].id, cardapio->pratos[i].nomePrato);
+        }
     }
 
     printf("\nSOBREMESAS:\n");
-    for(int i = 0; i < 5; i++) { 
-        printf("%i. %s\n", cardapio->sobremesas[i].id, cardapio->sobremesas[i].nomePrato);
+    for(int i = 10; i < 15; i++) { 
+        if(strcmp(cardapio->pratos[i].tipo, "Sobremesa") == 0) {
+            printf("%i. %s\n", cardapio->pratos[i].id, cardapio->pratos[i].nomePrato);
+        }
     }
     printf("\n");
-    
+}
+
+int buscarPrato(char prato[50], Cardapio *cardapio) {
+    for(int i = 0; i < 15; i++) {
+        if(strcmp(cardapio->pratos[i].nomePrato, prato) == 0) {
+            return i;
+        }
+    }
+    return -1;
 }

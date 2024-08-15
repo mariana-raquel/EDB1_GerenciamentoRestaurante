@@ -23,6 +23,8 @@ int maisOpcoes() {
 }
 
 int main() {
+    No *cabeca = NULL;
+
     int opcao = 0;
 
     while(opcao < 1 || opcao > 6) {
@@ -35,12 +37,11 @@ int main() {
         printf("6 - Sair\n\n");
 
         scanf("%i", &opcao);
-        
         if(opcao >= 1 && opcao <= 6) {
             switch (opcao) {
                 case 1:
                     printf("Você escolheu a opção: 1 - Adicionar um pedido\n\n");
-                    adicionarPedido();
+                    adicionarPedido(&cabeca);
                     opcao = maisOpcoes();
                     break;
                 case 2:
@@ -55,7 +56,7 @@ int main() {
                     break;
                 case 4:
                     printf("Você escolheu a opção: 4 - Listar os pedidos pendentes\n\n");
-                    listarPedidosPendentes();
+                    listarPedidosPendentes(cabeca);
                     opcao = maisOpcoes();
                     break;
                 case 5:
