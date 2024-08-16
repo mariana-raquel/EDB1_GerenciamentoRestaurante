@@ -16,12 +16,15 @@ typedef struct pedido {
     int qtdPratos;
 } Pedido; 
 
-struct no {
+typedef struct no {
     Pedido item;
     int idPedido;
     struct no *proximo;
-};
+} No;
 
-typedef struct no No;
+typedef struct Fila {
+  No *inicio;
+  No *fim;
+} Fila;
 
 #endif

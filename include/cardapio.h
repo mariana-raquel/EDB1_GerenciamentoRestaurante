@@ -7,6 +7,4 @@ Cardapio montarCardapio();
 
 void listarCardapio(Cardapio *cardapio);
 
-int buscarPrato(char prato[50], Cardapio *cardapio);
-
 #endif

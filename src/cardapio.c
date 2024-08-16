@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../include/structs.h"
+#include "../include/cores.h"
 #include "../include/cardapio.h"
 
 Cardapio montarCardapio() {
@@ -31,34 +32,25 @@ Cardapio montarCardapio() {
 
 void listarCardapio(Cardapio *cardapio)  { 
 
-    printf("ENTRADAS:\n");
+    printMagenta("ENTRADAS:\n");
     for(int i = 0; i < 5; i++) { 
         if(strcmp(cardapio->pratos[i].tipo, "Entrada") == 0) {
             printf("%i. %s\n", cardapio->pratos[i].id, cardapio->pratos[i].nomePrato);
         }
     }
 
-    printf("\nPRATOS PRINCIPAIS:\n");
+    printMagenta("\nPRATOS PRINCIPAIS:\n");
     for(int i = 5; i < 10; i++) { 
         if(strcmp(cardapio->pratos[i].tipo, "Prato Principal") == 0) {
             printf("%i. %s\n", cardapio->pratos[i].id, cardapio->pratos[i].nomePrato);
         }
     }
 
-    printf("\nSOBREMESAS:\n");
+    printMagenta("\nSOBREMESAS:\n");
     for(int i = 10; i < 15; i++) { 
         if(strcmp(cardapio->pratos[i].tipo, "Sobremesa") == 0) {
             printf("%i. %s\n", cardapio->pratos[i].id, cardapio->pratos[i].nomePrato);
         }
     }
     printf("\n");
-}
-
-int buscarPrato(char prato[50], Cardapio *cardapio) {
-    for(int i = 0; i < 15; i++) {
-        if(strcmp(cardapio->pratos[i].nomePrato, prato) == 0) {
-            return i;
-        }
-    }
-    return -1;
 }

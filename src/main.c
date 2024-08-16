@@ -1,75 +1,84 @@
 #include <stdio.h>
 #include "../include/structs.h"
 #include "../include/adicionarPedido.h"
-#include "../include/removerPedido.h"
-#include "../include/processarPedido.h"
-#include "../include/listarPedidosPendentes.h"
-#include "../include/listarPedidosProcessamento.h"
+#include "../include/pedido.h"
+#include "../include/lista.h"
+#include "../include/fila.h"
+#include "../include/cores.h"
 
-/*
-    Observações:
-        1. Certifique-se de que a implementação da lista ligada e da fila esteja correta e eficiente.
-        2. O sistema deve lidar adequadamente com tentativas de remoção de pratos que não existem na lista ligada.
-        3. Inclua uma interface de usuário que permita a interação fácil com as funcionalidades do sistema.
-        4. O código deve ser bem comentado e documentado para facilitar a compreensção e manutenção.
-        5. Modularize o projeto (.c, .h e makefile).
- */
 
 int maisOpcoes() {
     int opcao = 0;
-    printf("\nDeseja utilizar alguma outra funcionalidade?\n");
-    printf("1 - Sim\t\t7 - Não\n\n");
+    printCiano("\nDeseja utilizar alguma outra funcionalidade?\n");
+    printCiano("1 - Sim\t\t2 - Não\n");
     scanf("%i", &opcao);
-    return opcao-1;
+    return opcao == 1 ? 0 : 6;
 }
 
 int main() {
+    int opcao = 0;
+    Fila fila;
+    iniciarFila(&fila);
     No *cabecaLista = NULL;
 
-    int opcao = 0;
-
     while(opcao < 1 || opcao > 6) {
-        printf("\nInforme qual funcionalidade deseja utilizar:\n");
-        printf("1 - Adicionar um pedido\t\t\t");
-        printf("2 - Remover um pedido\n");
-        printf("3 - Processar um pedido\t\t\t");
-        printf("4 - Listar os pedidos pendentes\n");
-        printf("5 - Listar os pedidos em processamento  ");
-        printf("6 - Sair\n\n");
+        printCiano("\nInforme qual funcionalidade deseja utilizar:\n");
+        printCiano("1 - Adicionar um pedido\t\t\t");
+        printCiano("5 - Processar um pedido\n");
+        printCiano("2 - Remover um pedido\t\t\t");
+        printCiano("6 - Listar os pedidos pendentes\n");
+        printCiano("3 - Adicionar prato a um pedido\t\t");
+        printCiano("7 - Listar os pedidos em processamento\n");
+        printCiano("4 - Remover prato de um pedido\t\t");
+        printCiano("8 - Sair\n");
 
         scanf("%i", &opcao);
-        if(opcao >= 1 && opcao <= 6) {
+        if(opcao >= 1 && opcao <= 7) {
             switch (opcao) {
                 case 1:
-                    printf("Você escolheu a opção: 1 - Adicionar um pedido\n\n");
+                    printVerde("Você escolheu a opção: 1 - Adicionar um pedido\n\n");
                     adicionarPedido(&cabecaLista);
                     opcao = maisOpcoes();
                     break;
                 case 2:
-                    printf("Você escolheu a opção: 2 - Remover um pedido\n\n");
+                    printVerde("Você escolheu a opção: 2 - Remover um pedido\n\n");
                     removerPedido(&cabecaLista);
                     opcao = maisOpcoes();
                     break;
                 case 3:
-                    printf("Você escolheu a opção: 3 - Processar um pedido\n\n");
-                    processarPedido();
+                    printVerde("Você escolheu a opção: 3 - Adicionar prato a um pedido\n\n");
+                    adicionarPratoNoPedido(&cabecaLista);
                     opcao = maisOpcoes();
                     break;
                 case 4:
-                    printf("Você escolheu a opção: 4 - Listar os pedidos pendentes\n\n");
-                    listarPedidosPendentes(cabecaLista);
+                    printVerde("Você escolheu a opção: 4 - Remover prato de um pedido\n\n");
+                    removerPratoDoPedido(&cabecaLista);
                     opcao = maisOpcoes();
                     break;
                 case 5:
-                    printf("Você escolheu a opção: 5 - Listar os pedidos em processamento\n\n");
-                    listarPedidosEmProcessamento();
+                    printVerde("Você escolheu a opção: 5 - Processar um pedido\n\n");
+                    processarPedido(&cabecaLista, &fila);
                     opcao = maisOpcoes();
                     break;
                 case 6:
-                    printf("Você escolheu a opção: 6 - Sair\n\n");
+                    printVerde("Você escolheu a opção: 6 - Listar os pedidos pendentes\n\n");
+                    listarPedidosLista(cabecaLista);
+                    opcao = maisOpcoes();
+                    break;
+                case 7:
+                    printVerde("Você escolheu a opção: 7 - Listar os pedidos em processamento\n");
+                    listarPedidosFila(&fila);
+                    opcao = maisOpcoes();
+                    break;
+                case 8:
+                    printVerde("Você escolheu a opção: 8 - Sair\n");
+                    printVerde("Obrigado por utilizar nosso serviços!\n\n");
+                    break;
                 default:
                     break;
             }
+        } else {
+            printVermelho("Escolha uma opção válida!\n");
         }
     }
 
