@@ -97,7 +97,7 @@ void listarPedidosLista(No *cabeca) {
         printf("\nPedido: %i\n", atual->idPedido);
         Pedido p = atual->item;
         for(int i = 0; i < p.qtdPratos; i++) {
-            printf("%i. %s - %s\n", p.pratos[i].id, p.pratos[i].nomePrato, p.pratos[i].tipo);
+            printf("%i. %s - %s\n", i+1, p.pratos[i].nomePrato, p.pratos[i].tipo);
         }
         atual = atual->proximo;       
     }

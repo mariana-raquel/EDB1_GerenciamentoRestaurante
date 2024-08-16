@@ -71,7 +71,7 @@ void adicionarPratoNoPedido(No **cabeca) {
         p.qtdPratos = p.qtdPratos + qtdPratos;
         p.pratos = realloc(p.pratos, sizeof(ItemCardapio) * p.qtdPratos);
 
-        printCiano("\nPor favor, nos informe os ids do prato que deseja pedir (separados por espaço): ");
+        printCiano("\nPor favor, nos informe os ids do prato que deseja acrescentar (separados por espaço): ");
         int index = -1;
         for(int i = aux; i < p.qtdPratos; i++) {
             scanf("%i", &index);
@@ -100,14 +100,14 @@ void removerPratoDoPedido(No **cabeca) {
     printAmarelo("Este são os pedidos feitos:\n");
     listarPedidosLista(*cabeca);
 
-    int indPedido = -1;
+    int idPedido = -1;
     int v = 0;
     No *atual = *cabeca;
     while(v == 0) {
-        printCiano("Em qual pedido você deseja acrescentar o(s) prato(s)? ");
-        scanf("%i", &indPedido);
+        printCiano("\nEm qual pedido você deseja remover o(s) prato(s)? ");
+        scanf("%i", &idPedido);
 
-        while(atual != NULL && atual->idPedido != indPedido){
+        while(atual != NULL && atual->idPedido != idPedido){
             printf("%i\n", atual->idPedido);
             atual = atual->proximo;
         }
@@ -121,34 +121,34 @@ void removerPratoDoPedido(No **cabeca) {
     }
 
     Pedido p = atual->item;
-    int qtdPratos = 0;
-    printCiano("Quantos pratos você deseja remover do pedido? ");
-    scanf("%i", &qtdPratos);
-
-    if(qtdPratos > 0) {
-        int aux = p.qtdPratos;
-        p.qtdPratos = p.qtdPratos + qtdPratos;
-        p.pratos = realloc(p.pratos, sizeof(ItemCardapio) * p.qtdPratos);
-
-        printCiano("\nPor favor, nos informe os ids do prato que deseja pedir (separados por espaço): ");
-        int index = -1;
-        for(int i = aux; i < p.qtdPratos; i++) {
-            
+    int index = -1;
+    printCiano("Por favor, nos informe o id do prato que deseja remover: ");
+    scanf("%i", &index);
+    int cont = 0;
+    if(index != p.qtdPratos) {
+        for(int j = 0; j < p.qtdPratos-1; j++) {
+            if(index-1 == j) {
+                cont++;
+                p.pratos[j].id = p.pratos[j+1].id;
+                strcpy(p.pratos[j].nomePrato, p.pratos[j+1].nomePrato);
+                strcpy(p.pratos[j].tipo, p.pratos[j+1].tipo);
+            }
         }
-        
-        for(int i = 0; i < p.qtdPratos; i++) {
-            printf("%i. %s - %s\n", p.pratos[i].id, p.pratos[i].nomePrato, p.pratos[i].tipo);
+        while(cont == 0) {
+            printVermelho("\nDesculpe, não conhecemos o prato [");
+            printf("%i", index);
+            printVermelho("]. Digite novamente: ");
+            scanf("%i", &index);
         }
-
-        atual->item = p;
-        printVerde("Pratos adicionados no pedido [");
-        printf("%i", indPedido);
-        printVerde("]!\n");
-
-        listarPedidosLista(*cabeca);
     }
+    p.qtdPratos = p.qtdPratos - 1;
+    p.pratos = realloc(p.pratos, sizeof(ItemCardapio) * p.qtdPratos);
 
+    atual->item = p;
+    printVerde("\nPratos removidos no pedido [");
+    printf("%i", idPedido);
+    printVerde("]!\n");
 
-
+    listarPedidosLista(*cabeca);
 
 }

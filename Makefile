@@ -1,4 +1,4 @@
-PROGRAM=main
+PROGRAM=gerenciador_restaurante
 COMPILER=gcc
 CPPFLAGS=-I. -W
 OBJDIR=obj

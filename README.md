@@ -17,12 +17,12 @@ $ make
 ```
 Para executar o projeto, utilize:
 ```
-$ ./bin/dna_profiler
+$ ./bin/gerenciador_restaurante
 ```
 ou:
 ```
 $ cd bin
-$ ./dna_profiler
+$ ./gerenciador_restaurante
 ```
 Obs.: Certifique-se de que possui o `gcc` e o `make` instalados.
 

@@ -12,7 +12,7 @@ int maisOpcoes() {
     printCiano("\nDeseja utilizar alguma outra funcionalidade?\n");
     printCiano("1 - Sim\t\t2 - Não\n");
     scanf("%i", &opcao);
-    return opcao == 1 ? 0 : 6;
+    return opcao == 1 ? 0 : 8;
 }
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
         printCiano("5 - Processar um pedido\n");
         printCiano("2 - Remover um pedido\t\t\t");
         printCiano("6 - Listar os pedidos pendentes\n");
-        printCiano("3 - Adicionar prato a um pedido\t\t");
+        printCiano("3 - Adicionar prato(s) a um pedido\t");
         printCiano("7 - Listar os pedidos em processamento\n");
         printCiano("4 - Remover prato de um pedido\t\t");
         printCiano("8 - Sair\n");
