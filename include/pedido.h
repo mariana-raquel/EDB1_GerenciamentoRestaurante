@@ -3,12 +3,12 @@
 
 #include "structs.h"
 
+void adicionarPedido(No **cabeca);
+
 void processarPedido(No **cabeca, Fila *fila);
 
-int removerPedido(No **cabeca);
+void removerPedido(No **cabeca);
 
-void adicionarPratoNoPedido(No **cabeca);
-
-void removerPratoDoPedido(No **cabeca);
+void mostrarPedido(Pedido pedido, int idPedido);
 
 #endif

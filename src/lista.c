@@ -2,10 +2,16 @@
 #include <stdlib.h>
 #include "../include/structs.h"
 #include "../include/cores.h"
-#include "../include/lista.h"
 #include "../include/fila.h"
 
 
+/**
+ * @brief Método responsável por fazer a inserção 
+ * de um novo Pedido na lista.
+ * 
+ * @param cabeca
+ * @param pedido
+ */
 void inserirPedidoLista(No **cabeca, Pedido pedido) {
     No *novoPedido = malloc(sizeof(No));
     if(!novoPedido) {
@@ -13,16 +19,17 @@ void inserirPedidoLista(No **cabeca, Pedido pedido) {
         printVermelho("Pedido não registrado, tente novamente!\n");
         return;
     }
-    novoPedido->item = pedido;
+
+    novoPedido->pedido = pedido;
     novoPedido->proximo = NULL;
+
     if(*cabeca == NULL) {
         novoPedido->idPedido = 1;
         *cabeca = novoPedido;
 
-        printVerde("\nPedido");
-        printf(" %i ", novoPedido->idPedido);
-        printVerde("registrado!\n");
-
+        printVerde("\nPedido [");
+        printf("%i", novoPedido->idPedido);
+        printVerde("] registrado!\n");
         return;
     }
 
@@ -30,6 +37,7 @@ void inserirPedidoLista(No **cabeca, Pedido pedido) {
     while(atual->proximo != NULL) {
         atual = atual->proximo;
     }
+    
     novoPedido->idPedido = atual->idPedido + 1;
     atual->proximo = novoPedido;
 
@@ -39,6 +47,13 @@ void inserirPedidoLista(No **cabeca, Pedido pedido) {
 }
 
 
+/**
+ * @brief Método responsável por fazer a remoção
+ * de um Pedido da Lista de acordo com seu id.
+ * 
+ * @param cabeca
+ * @param numeroPedido
+ */
 void removerPedidoLista(No **cabeca, int numeroPedido) {
     if(*cabeca == NULL){
         printAmarelo("Não existem pedidos para serem removidos!\n");
@@ -71,6 +86,15 @@ void removerPedidoLista(No **cabeca, int numeroPedido) {
     printVerde("] removido com sucesso!\n");
 }
 
+
+/**
+ * @brief Método responsável por tentar fazer a inserção
+ * do primeiro Pedido da lista na fila de processamento, 
+ * e, em caso de sucesso, remove ele da lista.
+ * 
+ * @param cabeca
+ * @param fila
+ */
 void removerPrimeiroPedido(No **cabeca, Fila *fila) {
     if(*cabeca == NULL){
         printAmarelo("Não existem pedidos para serem removidos!\n");
@@ -86,16 +110,23 @@ void removerPrimeiroPedido(No **cabeca, Fila *fila) {
 }
 
 
+/**
+ * @brief Método responsável por listar os Pedidos
+ * contidos na lista de espera.
+ * 
+ * @param cabeca
+ */
 void listarPedidosLista(No *cabeca) {
     if(cabeca == NULL) {
-        printAmarelo("Não existem pedidos pendentes!");
+        printAmarelo("Não existem pedidos pendentes!\n");
         return;
     }
 
+    printAzul("Estes são os pedidos na lista de espera:\n");
     No *atual = cabeca;
     while(atual != NULL) {
+        Pedido p = atual->pedido;
         printf("\nPedido: %i\n", atual->idPedido);
-        Pedido p = atual->item;
         for(int i = 0; i < p.qtdPratos; i++) {
             printf("%i. %s - %s\n", i+1, p.pratos[i].nomePrato, p.pratos[i].tipo);
         }

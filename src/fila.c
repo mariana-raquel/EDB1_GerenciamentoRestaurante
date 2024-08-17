@@ -2,14 +2,26 @@
 #include <stdlib.h>
 #include "../include/structs.h"
 #include "../include/cores.h"
-#include "../include/fila.h"
 
-
+/**
+ * @brief Método responsável por fazer a iniciação da Fila.
+ * 
+ * @param fila
+ */
 void iniciarFila(Fila *fila) {
     fila->inicio = NULL;
     fila->fim = NULL;
 }
 
+
+/**
+ * @brief Método responsável por fazer a inserção
+ * de um novo Pedido na Fila
+ * 
+ * @param fila
+ * @param pedido
+ * @return int
+ */
 int inserirPedidoFila(Fila *fila, No pedido) {
     No *novoPedido = (No *) malloc(sizeof(No));
     if(!novoPedido) {
@@ -18,7 +30,7 @@ int inserirPedidoFila(Fila *fila, No pedido) {
         return 0;
     }
 
-    novoPedido->item = pedido.item;
+    novoPedido->pedido = pedido.pedido;
     novoPedido->idPedido = pedido.idPedido;
     novoPedido->proximo = NULL;
 
@@ -37,24 +49,58 @@ int inserirPedidoFila(Fila *fila, No pedido) {
     return 1;
 }
 
-void removerPedidoFila(Fila *fila);
 
+/**
+ * @brief Método responsável por fazer a remoção
+ * de um Pedido da Fila
+ * 
+ * @param fila
+ */
+void removerPedidoFila(Fila *fila) {
+    if(fila->inicio == NULL){
+        printAmarelo("Não existem pedidos para serem removidos!\n");
+        return;
+    }
+    
+    No *temp = fila->inicio;
+
+    int idPedido = temp->idPedido;
+
+    fila->inicio = fila->inicio->proximo;
+
+    if(fila->inicio == NULL) {
+        fila->fim = NULL;
+    }
+
+    free(temp);
+
+    printVerde("\nPedido [");
+    printf("%i", idPedido);
+    printVerde("] removido com sucesso!\n");
+
+}
+
+
+/**
+ * @brief Método responsável por listar os Pedidos 
+ * contidos na fila de processamento
+ * 
+ * @param fila
+ */
 void listarPedidosFila(Fila *fila) {
     if(fila->inicio == NULL) {
-        printAmarelo("Não existem pedidos para serem processados!");
+        printAmarelo("Não existem pedidos sendo processados!\n");
         return;
     }
 
+    printAzul("Estes são os pedidos na fila de processamento:\n");
     No *atual = fila->inicio;
-    while(atual != NULL) {
-        
-        Pedido p = atual->item;
+    while(atual != NULL) {    
+        Pedido p = atual->pedido;
         printf("\nPedido: %i\n", atual->idPedido);
         for(int i = 0; i < p.qtdPratos; i++) {
-            printf("%i. %s - %s\n", p.pratos[i].id, p.pratos[i].nomePrato, p.pratos[i].tipo);
+            printf("%i. %s - %s\n", i+1, p.pratos[i].nomePrato, p.pratos[i].tipo);
         }
         atual = atual->proximo;
     }
-    printf("\n");
-
 }
