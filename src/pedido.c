@@ -125,7 +125,7 @@ void processarPedido(No **cabeca, Fila *fila) {
 void mostrarPedido(Pedido pedido, int idPedido) {
     printf("\nPedido: %i\n", idPedido);
     for(int i = 0; i < pedido.qtdPratos; i++) {
-        printf("%i. %s - %s\n", i+1, pedido.pratos[i].nomePrato, pedido.pratos[i].tipo);
+        printf("%i. %s (%s)\n", i+1, pedido.pratos[i].nomePrato, pedido.pratos[i].tipo);
     }
     printf("\n");
 }

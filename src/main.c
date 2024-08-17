@@ -59,7 +59,7 @@ int main() {
                     opcao = maisOpcoes();
                     break;
                 case 3:
-                    printVerde("Você escolheu a opção: 3 - Adicionar prato a um pedido\n\n");
+                    printVerde("Você escolheu a opção: 3 - Adicionar prato(s) a um pedido\n\n");
                     adicionarPratoNoPedido(&cabeca);
                     opcao = maisOpcoes();
                     break;

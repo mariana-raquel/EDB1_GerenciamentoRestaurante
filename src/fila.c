@@ -99,7 +99,7 @@ void listarPedidosFila(Fila *fila) {
         Pedido p = atual->pedido;
         printf("\nPedido: %i\n", atual->idPedido);
         for(int i = 0; i < p.qtdPratos; i++) {
-            printf("%i. %s - %s\n", i+1, p.pratos[i].nomePrato, p.pratos[i].tipo);
+            printf("%i. %s (%s)\n", i+1, p.pratos[i].nomePrato, p.pratos[i].tipo);
         }
         atual = atual->proximo;
     }
