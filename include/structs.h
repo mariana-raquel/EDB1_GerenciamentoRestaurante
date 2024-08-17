@@ -2,7 +2,7 @@
 #define STRUCTS_H
 
 typedef struct itemCardapio {
-    int id;
+    int codigo;
     char nomePrato[50];
     char tipo[16];
 } ItemCardapio;
@@ -14,10 +14,11 @@ typedef struct cardapio {
 typedef struct pedido {
     ItemCardapio *pratos;
     int qtdPratos;
+    int id;
 } Pedido; 
 
 typedef struct no {
-    Pedido item;
+    Pedido pedido;
     int idPedido;
     struct no *proximo;
 } No;

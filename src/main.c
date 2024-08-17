@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include "../include/structs.h"
-#include "../include/adicionarPedido.h"
+#include "../include/prato.h"
 #include "../include/pedido.h"
 #include "../include/lista.h"
 #include "../include/fila.h"
 #include "../include/cores.h"
-
 
 int maisOpcoes() {
     int opcao = 0;
@@ -21,7 +20,7 @@ int main() {
     iniciarFila(&fila);
     No *cabecaLista = NULL;
 
-    while(opcao < 1 || opcao > 6) {
+    while(opcao < 1 || opcao > 8) {
         printCiano("\nInforme qual funcionalidade deseja utilizar:\n");
         printCiano("1 - Adicionar um pedido\t\t\t");
         printCiano("5 - Processar um pedido\n");
@@ -33,10 +32,10 @@ int main() {
         printCiano("8 - Sair\n");
 
         scanf("%i", &opcao);
-        if(opcao >= 1 && opcao <= 7) {
+        if(opcao >= 1 && opcao <= 8) {
             switch (opcao) {
                 case 1:
-                    printVerde("Você escolheu a opção: 1 - Adicionar um pedido\n\n");
+                    printVerde("Você escolheu a opção: 1 - Adicionar um pedido\n");
                     adicionarPedido(&cabecaLista);
                     opcao = maisOpcoes();
                     break;
@@ -66,13 +65,12 @@ int main() {
                     opcao = maisOpcoes();
                     break;
                 case 7:
-                    printVerde("Você escolheu a opção: 7 - Listar os pedidos em processamento\n");
+                    printVerde("Você escolheu a opção: 7 - Listar os pedidos em processamento\n\n");
                     listarPedidosFila(&fila);
                     opcao = maisOpcoes();
                     break;
                 case 8:
                     printVerde("Você escolheu a opção: 8 - Sair\n");
-                    printVerde("Obrigado por utilizar nosso serviços!\n\n");
                     break;
                 default:
                     break;
@@ -81,6 +79,7 @@ int main() {
             printVermelho("Escolha uma opção válida!\n");
         }
     }
+    printMagenta("\nObrigado por utilizar nosso serviços!\n\n");
 
     return 0;
 }
