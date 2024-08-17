@@ -4,7 +4,9 @@
 #include "../include/cores.h"
 
 /**
- * Método responsável por fazer a iniciação da Fila.
+ * @brief Método responsável por fazer a iniciação da Fila.
+ * 
+ * @param fila
  */
 void iniciarFila(Fila *fila) {
     fila->inicio = NULL;
@@ -13,8 +15,12 @@ void iniciarFila(Fila *fila) {
 
 
 /**
- * Método responsável por fazer a inserção
- * de um Pedido na Fila
+ * @brief Método responsável por fazer a inserção
+ * de um novo Pedido na Fila
+ * 
+ * @param fila
+ * @param pedido
+ * @return int
  */
 int inserirPedidoFila(Fila *fila, No pedido) {
     No *novoPedido = (No *) malloc(sizeof(No));
@@ -45,8 +51,10 @@ int inserirPedidoFila(Fila *fila, No pedido) {
 
 
 /**
- * Método responsável por fazer a remoção
+ * @brief Método responsável por fazer a remoção
  * de um Pedido da Fila
+ * 
+ * @param fila
  */
 void removerPedidoFila(Fila *fila) {
     if(fila->inicio == NULL){
@@ -74,8 +82,10 @@ void removerPedidoFila(Fila *fila) {
 
 
 /**
- * Método responsável por listar os Pedidos 
+ * @brief Método responsável por listar os Pedidos 
  * contidos na fila de processamento
+ * 
+ * @param fila
  */
 void listarPedidosFila(Fila *fila) {
     if(fila->inicio == NULL) {

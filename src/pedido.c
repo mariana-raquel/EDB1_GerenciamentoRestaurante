@@ -8,7 +8,12 @@
 #include "../include/cardapio.h"
 
 
-
+/**
+ * @brief Método responsável por criar 
+ * um pedido e adicioná-lo na lista
+ * 
+ * @param cabeca
+ */
 void adicionarPedido(No **cabeca) {
     int maisPedidos = 1;
     
@@ -55,7 +60,11 @@ void adicionarPedido(No **cabeca) {
 }
 
 
-
+/**
+ * @brief Método responsável por remover um pedido da lista.
+ * 
+ * @param cabeca
+ */
 void removerPedido(No **cabeca) {
     if(*cabeca == NULL) {
         printAmarelo("Não existem pedidos pendentes!\n");
@@ -91,11 +100,32 @@ void removerPedido(No **cabeca) {
 }
 
 
-
+/**
+ * @brief Método responsável por gerenciar o processamento de
+ * um pedido da lista, e adicioná-lo na fila de processamento
+ * 
+ * @param cabeca
+ * @param fila
+ */
 void processarPedido(No **cabeca, Fila *fila) {
     if(*cabeca == NULL){
         printAmarelo("Não existem pedidos para serem processados!\n");
         return;
     }
     removerPrimeiroPedido(cabeca, fila);
+}
+
+
+/**
+ * @brief Método responsável por exibir um pedido.
+ * 
+ * @param pedido
+ * @param idPedido
+ */
+void mostrarPedido(Pedido pedido, int idPedido) {
+    printf("\nPedido: %i\n", idPedido);
+    for(int i = 0; i < pedido.qtdPratos; i++) {
+        printf("%i. %s - %s\n", i+1, pedido.pratos[i].nomePrato, pedido.pratos[i].tipo);
+    }
+    printf("\n");
 }

@@ -4,11 +4,11 @@
 #include "../include/cores.h"
 
 /**
- * Método responsável por monstar o cardápio
+ * @brief Método responsável por monstar o cardápio
  * que será exibido ao realizar os pedidos.
  * 
  * Seus valores são fixos, não permitindo alteração.
- * @return Cardapio Montado
+ * @return
  */
 Cardapio montarCardapio() {
     
@@ -37,7 +37,9 @@ Cardapio montarCardapio() {
 
 
 /**
- * Método responsável por listar os pratos contidos no Cardapio.
+ * @brief Método responsável por listar os pratos contidos no Cardapio.
+ * 
+ * @param cardapio
  */
 void listarCardapio(Cardapio *cardapio)  { 
 

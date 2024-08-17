@@ -5,7 +5,13 @@
 #include "../include/fila.h"
 
 
-
+/**
+ * @brief Método responsável por fazer a inserção 
+ * de um novo Pedido na lista.
+ * 
+ * @param cabeca
+ * @param pedido
+ */
 void inserirPedidoLista(No **cabeca, Pedido pedido) {
     No *novoPedido = malloc(sizeof(No));
     if(!novoPedido) {
@@ -41,7 +47,13 @@ void inserirPedidoLista(No **cabeca, Pedido pedido) {
 }
 
 
-
+/**
+ * @brief Método responsável por fazer a remoção
+ * de um Pedido da Lista de acordo com seu id.
+ * 
+ * @param cabeca
+ * @param numeroPedido
+ */
 void removerPedidoLista(No **cabeca, int numeroPedido) {
     if(*cabeca == NULL){
         printAmarelo("Não existem pedidos para serem removidos!\n");
@@ -75,7 +87,14 @@ void removerPedidoLista(No **cabeca, int numeroPedido) {
 }
 
 
-
+/**
+ * @brief Método responsável por tentar fazer a inserção
+ * do primeiro Pedido da lista na fila de processamento, 
+ * e, em caso de sucesso, remove ele da lista.
+ * 
+ * @param cabeca
+ * @param fila
+ */
 void removerPrimeiroPedido(No **cabeca, Fila *fila) {
     if(*cabeca == NULL){
         printAmarelo("Não existem pedidos para serem removidos!\n");
@@ -91,6 +110,12 @@ void removerPrimeiroPedido(No **cabeca, Fila *fila) {
 }
 
 
+/**
+ * @brief Método responsável por listar os Pedidos
+ * contidos na lista de espera.
+ * 
+ * @param cabeca
+ */
 void listarPedidosLista(No *cabeca) {
     if(cabeca == NULL) {
         printAmarelo("Não existem pedidos pendentes!\n");

@@ -4,10 +4,16 @@
 #include "../include/cores.h"
 #include "../include/structs.h"
 #include "../include/lista.h"
+#include "../include/pedido.h"
 #include "../include/cardapio.h"
 
 
-
+/**
+ * @brief Método responsável por adicionar prato(s)
+ * no pedido que será informado.
+ * 
+ * @param cabeca
+ */
 void adicionarPratoNoPedido(No **cabeca) {
     if(*cabeca == NULL) {
         printAmarelo("Não existem pedidos pendentes!\n");
@@ -74,6 +80,12 @@ void adicionarPratoNoPedido(No **cabeca) {
 }
 
 
+/**
+ * @brief Método responsável por remover um prato
+ * no pedido que será informado.
+ * 
+ * @param cabeca
+ */
 void removerPratoDoPedido(No **cabeca) {
     if(*cabeca == NULL) {
         printAmarelo("Não existem pedidos pendentes!\n");
@@ -102,35 +114,54 @@ void removerPratoDoPedido(No **cabeca) {
     }
 
     Pedido p = atual->pedido;
+
+    mostrarPedido(p, atual->idPedido);
+
     int index = -1;
     printCiano("Por favor, nos informe o código do prato que deseja remover: ");
     scanf("%i", &index);
     int cont = 0;
-    if(index != p.qtdPratos) {
-        while(cont == 0) {
-            for(int j = 0; j < p.qtdPratos-1; j++) {
-                if(index-1 == j || cont > 0) {
-                    cont++;
-                    p.pratos[j].codigo = p.pratos[j+1].codigo;
-                    strcpy(p.pratos[j].nomePrato, p.pratos[j+1].nomePrato);
-                    strcpy(p.pratos[j].tipo, p.pratos[j+1].tipo);
+    if(p.qtdPratos == 1) {
+        while(index != 1) {
+            printVermelho("\nDesculpe, não conhecemos o prato [");
+            printf("%i", index);
+            printVermelho("]. Digite novamente: ");
+            scanf("%i", &index);
+        }
+        removerPedidoLista(cabeca, atual->idPedido);
+        
+        printAmarelo("\nO pedido [");
+        printf("%i", atual->idPedido);
+        printAmarelo("] só tinha um único prato, então também foi removido!\n");
+
+    } else {
+        if(index != p.qtdPratos) {
+            while(cont == 0) {
+                for(int j = 0; j < p.qtdPratos-1; j++) {
+                    if(index-1 == j || cont > 0) {
+                        cont++;
+                        p.pratos[j].codigo = p.pratos[j+1].codigo;
+                        strcpy(p.pratos[j].nomePrato, p.pratos[j+1].nomePrato);
+                        strcpy(p.pratos[j].tipo, p.pratos[j+1].tipo);
+                    }
+                }
+                if(cont == 0) {
+                    printVermelho("\nDesculpe, não conhecemos o prato [");
+                    printf("%i", index);
+                    printVermelho("]. Digite novamente: ");
+                    scanf("%i", &index);
                 }
             }
-            if(cont == 0) {
-                printVermelho("\nDesculpe, não conhecemos o prato [");
-                printf("%i", index);
-                printVermelho("]. Digite novamente: ");
-                scanf("%i", &index);
-            }
         }
+
+        p.qtdPratos = p.qtdPratos - 1;
+        p.pratos = realloc(p.pratos, sizeof(ItemCardapio) * p.qtdPratos);
+
+        atual->pedido = p;
+        printVerde("\nPrato removido no pedido [");
+        printf("%i", idPedido);
+        printVerde("]!\n");
+
     }
-
-    p.qtdPratos = p.qtdPratos - 1;
-    p.pratos = realloc(p.pratos, sizeof(ItemCardapio) * p.qtdPratos);
-
-    atual->pedido = p;
-    printVerde("\nPrato removido no pedido [");
-    printf("%i", idPedido);
-    printVerde("]!\n");
-
+    
 }

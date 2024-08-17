@@ -9,4 +9,6 @@ void processarPedido(No **cabeca, Fila *fila);
 
 void removerPedido(No **cabeca);
 
+void mostrarPedido(Pedido pedido, int idPedido);
+
 #endif
