@@ -11,6 +11,8 @@ Desenvolver um sistema para gerenciar os pedidos de um restaurante, onde os pedi
 
 O detalhamento do projeto encontra-se __*[aqui](./docs/projeto_1.pdf)*__.
 
+O projeto está neste __*[repositório](https://github.com/mariana-raquel/EDB1_GerenciamentoRestaurante)*__.
+
 ## Funcionalidades:
 
 ### 1 - Adicionar um pedido:
